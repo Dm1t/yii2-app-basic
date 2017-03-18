@@ -17,24 +17,25 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['logout'],
+                    'rules' => [
+                        [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                        ],
                     ],
                 ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+                    'verbs' => [
+                        'class' => VerbFilter::className(),
+                        'actions' => [
+                        'logout' => ['post'],
+                        ],
+                    ],
         ];
+        
     }
 
     /**
@@ -122,4 +123,8 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionSay($message = 'Привет')
+        {
+            return $this->render('say', ['message' => $message]);
+        }
 }
